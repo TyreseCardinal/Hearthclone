@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hearthclone Mini</title>
 </head>
+
 <body>
   <main id="game-board">
     <section id="enemy-section">
+      <div class="health-container player-info" id="enemy-health-container">HP</div>
+      <div class="mana-container player-info" id="enemy-mana-container">MANA</div>
 
+      <!-- Card/Deck -->
+      <div class="hand-container" id="enemy-hand-container">HAND</div>
+      <div class="deck-container" id="enemy-deck-container">DECK</div>
     </section>
     <section id="battlefield-section">
 
     </section>
     <section id="game-ui-section">
-
+      <button class="button" id="end-turn-button">END TURN</button>
+      <p class="text" id="turn-indicator-text"></p>
     </section>
     <section id="player-section">
+      <div class="health-container player-info" id="player-health-container">HP</div>
+      <div class="mana-container player-info" id="player-mana-container">MANA</div>
       
+      <!-- Card/Deck -->
+      <div class="hand-container" id="player-hand-container">HAND</div>
+      <div class="deck-container" id="player-deck-container">DECK</div>
     </section>
   </main>
 
   <script src="app.js"></script>
 </body>
+
 </html>
