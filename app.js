@@ -46,9 +46,35 @@ playerHealth.innerHTML = gameState.player.health;
 const playerMana = document.getElementById(`player-mana-container`);
 playerMana.innerHTML = gameState.player.mana;
 
+const playerHand = document.getElementById(`player-hand-container`);
+for (let i = 0; i < gameState.player.hand.length; i++) {
+  const playerHandCard = gameState.player.hand[i];
+
+  playerHand.insertAdjacentHTML(
+    "beforeend",
+    `<div class="hand-card">
+      ${playerHandCard.name}<br>
+      ${playerHandCard.manaCost}
+    </div>`
+  );
+}
+
 // Enemy UI render pipeline
 const enemyHealth = document.getElementById(`enemy-health-container`);
 enemyHealth.innerHTML = gameState.enemy.health;
 
 const enemyMana = document.getElementById(`enemy-mana-container`);
 enemyMana.innerHTML = gameState.enemy.mana;
+
+const enemyHand = document.getElementById(`enemy-hand-container`);
+for (let i = 0; i < gameState.enemy.hand.length; i++) {
+  const enemyHandCard = gameState.enemy.hand[i];
+
+  enemyHand.insertAdjacentHTML(
+    "beforeend",
+    `<div class="hand-card">
+      ${enemyHandCard.name}<br>
+      ${enemyHandCard.manaCost}
+    </div>`
+  );
+}
