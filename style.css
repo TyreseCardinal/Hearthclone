@@ -28,3 +28,18 @@ body {
   grid-row-start: 5;
   grid-row-end: 6;
 }
+
+#battlefield-section {
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+#game-ui-section {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  background-color: aqua;
+}
