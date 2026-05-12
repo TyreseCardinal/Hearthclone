@@ -1,0 +1,30 @@
+body {
+  margin: 0px;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  height: 100vh;
+}
+
+#enemy-section,
+#player-section {
+  border: 2px solid black;
+  padding: 0px 0px;
+}
+
+#enemy-section {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+#player-section {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
