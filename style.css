@@ -6,11 +6,15 @@ body {
   box-sizing: border-box;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* ====================================================== */
 /* Game Board */
 /* ====================================================== */
 
-#game-board {
+.gameplay-screen  {
   display: grid;
 
   grid-template-columns: repeat(5, 1fr);

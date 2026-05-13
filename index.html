@@ -12,114 +12,132 @@
 </head>
 
 <body>
-  <main id="game-board">
-    <!-- Game UI Section -->
-    <section class="board-section" id="game-ui-section">
-      <!-- Turn Information -->
-      <div class="ui-container" id="turn-info-container">
-        <p class="ui-text" id="turn-indicator-text"></p>
-      </div>
+  <main id="app">
 
-      <!-- UI Controls -->
-      <div class="ui-container" id="controls-container">
-        <button class="ui-button" id="end-turn-button">END TURN</button>
-      </div>
+    <!-- Main menu screen -->
+    <section id="main-menu-screen" class="screen">
+      <button onclick="showScreen('hero-select-screen')" id="click-to-start-btn" class="button">Click to start</button>
     </section>
 
-    <!-- Battlefield Section -->
-    <section class="board-section" id="battlefield-section">
-      <!-- Enemy Minion Row -->
-      <div class="battlefield-row" id="enemy-minion-container">
-        Enemy Minions Here
+    <!-- Hero select screen -->
+    <section id="hero-select-screen" class="screen hidden">
+      <div id="hero-selection-mage" class="hero-selection">Mage</div>
+      <div id="hero-selection-hunter" class="hero-selection">Hunter</div>
+      <div id="hero-selection-brute" class="hero-selection">Brute
       </div>
-
-      <!-- Battlefield Center / Overlay Space -->
-      <div class="battlefield-center" id="battlefield-center-container"></div>
-
-      <!-- Player Minion Row -->
-      <div class="battlefield-row" id="player-minion-container">
-        Player Minions Here
-      </div>
+      <button onclick="showScreen('game-board')" id="hero-selection-confirmation-btn" class="button">Select</button>
     </section>
 
-    <!-- Player Section -->
-    <section class="board-section" id="player-section">
-      
-      <!-- Player Bottom UI Row -->
-      <div class="bottom-row" id="player-bottom-row">
-        
-        <!-- Player Info -->
-        <div class="info-container" id="player-info-container">
-          <!-- Player Health -->
-          <div class="health-container stat-container" id="player-health-container">
-            HP
+    <!-- Gameplay screen -->
+    <section id="game-board" class="screen hidden gameplay-screen">
+      <!-- Game UI Section -->
+      <section class="board-section" id="game-ui-section">
+        <!-- Turn Information -->
+        <div class="ui-container" id="turn-info-container">
+          <p class="ui-text" id="turn-indicator-text"></p>
+        </div>
+
+        <!-- UI Controls -->
+        <div class="ui-container" id="controls-container">
+          <button class="ui-button" id="end-turn-button">END TURN</button>
+        </div>
+      </section>
+
+      <!-- Battlefield Section -->
+      <section class="board-section" id="battlefield-section">
+        <!-- Enemy Minion Row -->
+        <div class="battlefield-row" id="enemy-minion-container">
+          Enemy Minions Here
+        </div>
+
+        <!-- Battlefield Center / Overlay Space -->
+        <div class="battlefield-center" id="battlefield-center-container"></div>
+
+        <!-- Player Minion Row -->
+        <div class="battlefield-row" id="player-minion-container">
+          Player Minions Here
+        </div>
+      </section>
+
+      <!-- Player Section -->
+      <section class="board-section" id="player-section">
+
+        <!-- Player Bottom UI Row -->
+        <div class="bottom-row" id="player-bottom-row">
+
+          <!-- Player Info -->
+          <div class="info-container" id="player-info-container">
+            <!-- Player Health -->
+            <div class="health-container stat-container" id="player-health-container">
+              HP
+            </div>
+
+            <!-- Player Mana -->
+            <div class="mana-container stat-container" id="player-mana-container">
+              MANA
+            </div>
           </div>
 
-          <!-- Player Mana -->
-          <div class="mana-container stat-container" id="player-mana-container">
-            MANA
-          </div>
-        </div>
+          <!-- Player Hero -->
+          <div class="hero-container" id="player-hero-container">
+            <!-- Player Hero Icon -->
+            <div class="hero-icon-container" id="player-hero-icon-container"></div>
 
-        <!-- Player Hero -->
-        <div class="hero-container" id="player-hero-container">
-          <!-- Player Hero Icon -->
-          <div class="hero-icon-container" id="player-hero-icon-container"></div>
-
-          <!-- Player Hero Power -->
-          <button class="hero-power-container" id="player-hero-power-container">
-            HERO POWER
-          </button>
-        </div>
-
-        <!-- Player Hand + Deck -->
-        <div class="hand-deck-container" id="player-hand-deck-container">
-          <!-- Player Hand -->
-          <div class="hand-container" id="player-hand-container">HAND</div>
-
-          <!-- Player Deck -->
-          <div class="deck-container" id="player-deck-container">DECK</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Enemy Section -->
-    <section class="board-section" id="enemy-section">
-      <!-- Enemy Top UI Row -->
-      <div class="top-row" id="enemy-top-row">
-        <!-- Enemy Hand + Deck -->
-        <div class="hand-deck-container" id="enemy-hand-deck-container">
-          <!-- Enemy Deck -->
-          <div class="deck-container" id="enemy-deck-container">DECK</div>
-
-          <!-- Enemy Hand -->
-          <div class="hand-container" id="enemy-hand-container">HAND</div>
-        </div>
-
-        <!-- Enemy Hero -->
-        <div class="hero-container" id="enemy-hero-container">
-          <!-- Enemy Hero Icon -->
-          <div class="hero-icon-container" id="enemy-hero-icon-container"></div>
-
-          <!-- Enemy Hero Power -->
-          <button class="hero-power-container" id="enemy-hero-power-container">
-            HERO POWER
-          </button>
-        </div>
-
-        <!-- Enemy Info -->
-        <div class="info-container" id="enemy-info-container">
-          <!-- Enemy Health -->
-          <div class="health-container stat-container" id="enemy-health-container">
-            HP
+            <!-- Player Hero Power -->
+            <button class="hero-power-container" id="player-hero-power-container">
+              HERO POWER
+            </button>
           </div>
 
-          <!-- Enemy Mana -->
-          <div class="mana-container stat-container" id="enemy-mana-container">
-            MANA
+          <!-- Player Hand + Deck -->
+          <div class="hand-deck-container" id="player-hand-deck-container">
+            <!-- Player Hand -->
+            <div class="hand-container" id="player-hand-container">HAND</div>
+
+            <!-- Player Deck -->
+            <div class="deck-container" id="player-deck-container">DECK</div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Enemy Section -->
+      <section class="board-section" id="enemy-section">
+        <!-- Enemy Top UI Row -->
+        <div class="top-row" id="enemy-top-row">
+          <!-- Enemy Hand + Deck -->
+          <div class="hand-deck-container" id="enemy-hand-deck-container">
+            <!-- Enemy Deck -->
+            <div class="deck-container" id="enemy-deck-container">DECK</div>
+
+            <!-- Enemy Hand -->
+            <div class="hand-container" id="enemy-hand-container">HAND</div>
+          </div>
+
+          <!-- Enemy Hero -->
+          <div class="hero-container" id="enemy-hero-container">
+            <!-- Enemy Hero Icon -->
+            <div class="hero-icon-container" id="enemy-hero-icon-container"></div>
+
+            <!-- Enemy Hero Power -->
+            <button class="hero-power-container" id="enemy-hero-power-container">
+              HERO POWER
+            </button>
+          </div>
+
+          <!-- Enemy Info -->
+          <div class="info-container" id="enemy-info-container">
+            <!-- Enemy Health -->
+            <div class="health-container stat-container" id="enemy-health-container">
+              HP
+            </div>
+
+            <!-- Enemy Mana -->
+            <div class="mana-container stat-container" id="enemy-mana-container">
+              MANA
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
