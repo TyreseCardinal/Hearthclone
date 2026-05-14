@@ -1,5 +1,6 @@
 const gameState = {
   currentTurn: "player",
+  selectedHero: null,
   turnNumber: 0,
   player: {
     health: 30,
@@ -94,5 +95,18 @@ function showScreen(screenId) {
   const activeScreen = document.getElementById(screenId);
   if(activeScreen) {
     activeScreen.classList.remove('hidden');
+  }
+}
+
+const heroCards = document.querySelectorAll(".hero-selection-card");
+
+for (let i = 0; i < heroCards.length; i++) {
+  let clickedCard = heroCards[i];
+  console.log(clickedCard);
+}
+
+if (heroCards.clickedCard) {
+  for (let i = 0; i < heroCards.length; i++) {
+    clickedCard
   }
 }

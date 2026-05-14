@@ -20,12 +20,18 @@
     </section>
 
     <!-- Hero select screen -->
-    <section id="hero-select-screen" class="screen hidden">
-      <div id="hero-selection-mage" class="hero-selection">Mage</div>
-      <div id="hero-selection-hunter" class="hero-selection">Hunter</div>
-      <div id="hero-selection-brute" class="hero-selection">Brute
-      </div>
-      <button onclick="showScreen('game-board')" id="hero-selection-confirmation-btn" class="button">Select</button>
+    <section id="hero-select-screen" class="screen hidden hero-selection">
+
+      <section id="hero-selection-container" >
+        
+        <div id="hero-selection-mage" class="hero-selection-card">Mage</div>
+      
+        <div id="hero-selection-hunter" class="hero-selection-card">Hunter</div>
+
+        <div id="hero-selection-brute" class="hero-selection-card">Brute
+        </div>
+
+      </section>
     </section>
 
     <!-- Gameplay screen -->
