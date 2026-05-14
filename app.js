@@ -1,6 +1,6 @@
 const gameState = {
-  currentTurn: "player",
   selectedHero: null,
+  currentTurn: "player",
   turnNumber: 0,
   player: {
     health: 30,
@@ -56,7 +56,7 @@ for (let i = 0; i < gameState.player.hand.length; i++) {
     `<div class="hand-card">
       ${playerHandCard.name}<br>
       ${playerHandCard.manaCost}
-    </div>`
+    </div>`,
   );
 }
 
@@ -76,25 +76,24 @@ for (let i = 0; i < gameState.enemy.hand.length; i++) {
     `<div class="hand-card">
       ${enemyHandCard.name}<br>
       ${enemyHandCard.manaCost}
-    </div>`
+    </div>`,
   );
 }
-
 
 const mainMenu = document.getElementById("main-menu-screen");
 const heroSelect = document.getElementById("hero-select-screen");
 const gameBoard = document.getElementById("game-board");
 
 function showScreen(screenId) {
-  const screens = document.querySelectorAll('.screen');
+  const screens = document.querySelectorAll(".screen");
 
-  screens.forEach(screen => {
-    screen.classList.add('hidden');
+  screens.forEach((screen) => {
+    screen.classList.add("hidden");
   });
 
   const activeScreen = document.getElementById(screenId);
-  if(activeScreen) {
-    activeScreen.classList.remove('hidden');
+  if (activeScreen) {
+    activeScreen.classList.remove("hidden");
   }
 }
 
@@ -102,42 +101,66 @@ function showScreen(screenId) {
 const heroCards = document.querySelectorAll(".hero-selection-card");
 
 for (let i = 0; i < heroCards.length; i++) {
-
   const clickedCard = heroCards[i];
 
   clickedCard.addEventListener("click", () => {
-
-      // Remove selected state from all hero cards
+    // Remove selected state from all hero cards
     for (let j = 0; j < heroCards.length; j++) {
-      
       // Remove selected class here
-      heroCards[j].classList.remove("selected-hero")
+      heroCards[j].classList.remove("selected-hero");
     }
-    
-    // Add selected state to clicked hero card
-        clickedCard.classList.add("selected-hero");
 
-    
+    // Add selected state to clicked hero card
+    clickedCard.classList.add("selected-hero");
+
     // Update selected hero in gameState
-    let heroSelected = clickedCard.id
+    let heroSelected = clickedCard.id;
 
     gameState.selectedHero = heroSelected;
     // Show confirm button
-    let confirmHeroButton = document.getElementById("hero-selection-confirm-button");
+    let confirmHeroButton = document.getElementById(
+      "hero-selection-confirm-button",
+    );
 
     if (heroSelected) {
-      confirmHeroButton.classList.remove('hidden')
+      confirmHeroButton.classList.remove("hidden");
     }
-    
+
     // Debugging
     console.log(clickedCard);
   });
-
 }
 
 // Transition from hero select -> gameboard
-let confirmHeroButton = document.getElementById("hero-selection-confirm-button");
+let confirmHeroButton = document.getElementById(
+  "hero-selection-confirm-button",
+);
 
 confirmHeroButton.addEventListener("click", () => {
   showScreen("game-board");
-})
+  startGame();
+});
+
+// Turn Zero Initialization System
+function startGame() {
+
+  // Randomize first turn
+  if (Math.random() < 0.5) {
+    gameState.currentTurn = "player";
+  } else {
+    gameState.currentTurn = "enemy";
+  }
+
+  // Turn indicator UI
+  const turnIndicator = document.getElementById("turn-indicator-text");
+
+  // Display current turn
+  if (gameState.currentTurn === "player") {
+    turnIndicator.innerHTML = "Player Turn";
+  } else {
+    turnIndicator.innerHTML = "Enemy Turn";
+  }
+
+  // Debugging
+  console.log("Current Turn:", gameState.currentTurn);
+}
