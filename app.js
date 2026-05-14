@@ -98,15 +98,46 @@ function showScreen(screenId) {
   }
 }
 
+// Hero Selection logic
 const heroCards = document.querySelectorAll(".hero-selection-card");
 
 for (let i = 0; i < heroCards.length; i++) {
-  let clickedCard = heroCards[i];
-  console.log(clickedCard);
+
+  const clickedCard = heroCards[i];
+
+  clickedCard.addEventListener("click", () => {
+
+      // Remove selected state from all hero cards
+    for (let j = 0; j < heroCards.length; j++) {
+      
+      // Remove selected class here
+      heroCards[j].classList.remove("selected-hero")
+    }
+    
+    // Add selected state to clicked hero card
+        clickedCard.classList.add("selected-hero");
+
+    
+    // Update selected hero in gameState
+    let heroSelected = clickedCard.id
+
+    gameState.selectedHero = heroSelected;
+    // Show confirm button
+    let confirmHeroButton = document.getElementById("hero-selection-confirm-button");
+
+    if (heroSelected) {
+      confirmHeroButton.classList.remove('hidden')
+    }
+    
+    // Debugging
+    console.log(clickedCard);
+  });
+
 }
 
-if (heroCards.clickedCard) {
-  for (let i = 0; i < heroCards.length; i++) {
-    clickedCard
-  }
-}
+// Transition from hero select -> gameboard
+let confirmHeroButton = document.getElementById("hero-selection-confirm-button");
+
+confirmHeroButton.addEventListener("click", () => {
+  showScreen("game-board");
+})
