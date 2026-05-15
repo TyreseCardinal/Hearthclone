@@ -5,7 +5,7 @@ const gameState = {
   player: {
     health: 30,
     mana: 0,
-    hand: [
+    deck: [
       {
         name: "Fireball",
         manaCost: 2,
@@ -19,11 +19,12 @@ const gameState = {
         manaCost: 1,
       },
     ],
+    hand: [],
   },
   enemy: {
     health: 30,
     mana: 0,
-    hand: [
+    deck: [
       {
         name: "Fireball",
         manaCost: 2,
@@ -37,6 +38,7 @@ const gameState = {
         manaCost: 1,
       },
     ],
+    hand: [],
   },
 };
 
