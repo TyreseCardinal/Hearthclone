@@ -64,7 +64,9 @@ confirmHeroButton.addEventListener("click", () => {
 // Game State
 const gameState = {
   selectedHero: null,
-  currentTurn: "player",
+  startingPlayer: null,
+  secondPlayer: null,
+  currentTurn: null,
   turnNumber: 0,
   player: {
     health: 30,
@@ -212,18 +214,25 @@ function startGame() {
   initializePlayerDeck();
   // initializeEnemyDeck(); refer to function for comment 
 
-  // Draw Opening Hand
-  drawOpeningHand(gameState.player, 3);
-
-  renderPlayerHand();
-
+  
+  
   // Randomize first turn
   if (Math.random() < 0.5) {
-    gameState.currentTurn = "player";
+    gameState.startingPlayer = gameState.player;
+    gameState.secondPlayer = gameState.enemy;
+    gameState.currentTurn = gameState.player;
   } else {
-    gameState.currentTurn = "enemy";
+    gameState.startingPlayer = gameState.enemy;
+    gameState.secondPlayer = gameState.player;
+    gameState.currentTurn = gameState.enemy;
   }
-
+  
+  // Draw Opening Hand
+  drawOpeningHand(gameState.startingPlayer, 3);
+  drawOpeningHand(gameState.secondPlayer, 4);
+  
+  renderPlayerHand();
+  renderEnemyHand()
   renderTurnIndicator();
 }
 
@@ -263,7 +272,7 @@ function renderTurnIndicator() {
 const turnIndicator = document.getElementById("turn-indicator-text");
 
   // Display current turn
-  if (gameState.currentTurn === "player") {
+  if (gameState.currentTurn === gameState.player) {
     turnIndicator.innerHTML = "Player Turn";
   } else {
     turnIndicator.innerHTML = "Enemy Turn";
