@@ -1,6 +1,3 @@
-
-
-
 const mainMenu = document.getElementById("main-menu-screen");
 const heroSelect = document.getElementById("hero-select-screen");
 const gameBoard = document.getElementById("game-board");
@@ -211,8 +208,14 @@ const heroBaseKit = {
 // Gameplay State Systems
 function startGame() {
 
+  // Initialize Player/Enemy Decks
   initializePlayerDeck();
   // initializeEnemyDeck(); refer to function for comment 
+
+  // Draw Opening Hand
+  drawOpeningHand(gameState.player, 3);
+
+  renderPlayerHand();
 
   // Randomize first turn
   if (Math.random() < 0.5) {
@@ -224,8 +227,17 @@ function startGame() {
   renderTurnIndicator();
 }
 
-// function drawCard(player) {
-//   gameState.player.deck} TO-DO IMPLEMENT PROPERLY
+function drawCard(player) {
+  const cardDrawn = player.deck.pop();
+
+  player.hand.push(cardDrawn);
+}
+
+function drawOpeningHand(player, amount) {
+  for (let i = 0; i < amount; i++) {
+    drawCard(player);
+  }
+}
 
 function initializePlayerDeck() {
   let selectedPlayerHero = gameState.selectedHero;
@@ -246,8 +258,9 @@ function initializePlayerDeck() {
 // Render Systems 
 
 // Turn indicator UI
+
 function renderTurnIndicator() {
-  const turnIndicator = document.getElementById("turn-indicator-text");
+const turnIndicator = document.getElementById("turn-indicator-text");
 
   // Display current turn
   if (gameState.currentTurn === "player") {
@@ -256,7 +269,6 @@ function renderTurnIndicator() {
     turnIndicator.innerHTML = "Enemy Turn";
   }
 } 
-
 // Player UI render pipeline
 function renderPlayerHand() {
 
