@@ -58,9 +58,6 @@ confirmHeroButton.addEventListener("click", () => {
   startGame();
 });
 
-
-
-
 // Game State
 const gameState = {
   selectedHero: null,
@@ -71,8 +68,7 @@ const gameState = {
   player: {
     health: 30,
     mana: 0,
-    deck: [
-    ],
+    deck: [],
     hand: [],
   },
   enemy: {
@@ -209,13 +205,13 @@ const heroBaseKit = {
 
 // Gameplay State Systems
 function startGame() {
-
   // Initialize Player/Enemy Decks
   initializePlayerDeck();
-  // initializeEnemyDeck(); refer to function for comment 
 
-  
-  
+  initializeEnemyDeck();
+
+  initializeEndTurnButton();
+
   // Randomize first turn
   if (Math.random() < 0.5) {
     gameState.startingPlayer = gameState.player;
@@ -226,13 +222,13 @@ function startGame() {
     gameState.secondPlayer = gameState.player;
     gameState.currentTurn = gameState.enemy;
   }
-  
+
   // Draw Opening Hand
   drawOpeningHand(gameState.startingPlayer, 3);
   drawOpeningHand(gameState.secondPlayer, 4);
-  
+
   renderPlayerHand();
-  renderEnemyHand()
+  renderEnemyHand();
   renderTurnIndicator();
 }
 
@@ -248,28 +244,52 @@ function drawOpeningHand(player, amount) {
   }
 }
 
+function endTurn() {
+  gameState.currentTurn = (
+  gameState.currentTurn === gameState.player
+    ? gameState.enemy
+    : gameState.player
+);
+
+  gameState.turnNumber++;
+
+  // Debugging
+  console.log(gameState.currentTurn);
+  console.log(gameState.turnNumber);
+  console.log("clicked");
+
+  renderTurnIndicator();
+}
+
 function initializePlayerDeck() {
   let selectedPlayerHero = gameState.selectedHero;
-  
+
   let playerDeck = [...heroBaseKit[selectedPlayerHero].deck];
 
   gameState.player.deck = playerDeck;
 }
-// function initializeEnemyDeck() {
-//   let selectedEnemyHero = gameState.selectedHero;
-  
-//   let enemyDeck = [...heroBaseKit[selectedEnemyHero].deck];
 
-//   gameState.enemy.deck = enemyDeck;
-// } TODO:
-// replace with randomized enemy hero system
+function initializeEnemyDeck() {
+  let selectedEnemyHero = "mage";
 
-// Render Systems 
+  let enemyDeck = [...heroBaseKit[selectedEnemyHero].deck];
+
+  gameState.enemy.deck = enemyDeck;
+}
+
+function initializeEndTurnButton() {
+  const endTurnButton = document.getElementById("end-turn-button");
+
+  endTurnButton.addEventListener("click", endTurn);
+
+  console.log("Button initialized");
+}
+// Render Systems
 
 // Turn indicator UI
 
 function renderTurnIndicator() {
-const turnIndicator = document.getElementById("turn-indicator-text");
+  const turnIndicator = document.getElementById("turn-indicator-text");
 
   // Display current turn
   if (gameState.currentTurn === gameState.player) {
@@ -277,17 +297,16 @@ const turnIndicator = document.getElementById("turn-indicator-text");
   } else {
     turnIndicator.innerHTML = "Enemy Turn";
   }
-} 
+}
 // Player UI render pipeline
 function renderPlayerHand() {
-
   const playerHand = document.getElementById(`player-hand-container`);
 
   playerHand.innerHTML = "";
 
   for (let i = 0; i < gameState.player.hand.length; i++) {
     const playerHandCard = gameState.player.hand[i];
-    
+
     playerHand.insertAdjacentHTML(
       "beforeend",
       `<div class="hand-card">
@@ -298,16 +317,14 @@ function renderPlayerHand() {
   }
 }
 
-
-function renderPlayerHealth () {
-const playerHealth = document.getElementById(`player-health-container`);
-playerHealth.innerHTML = gameState.player.health;
-  
+function renderPlayerHealth() {
+  const playerHealth = document.getElementById(`player-health-container`);
+  playerHealth.innerHTML = gameState.player.health;
 }
 
-function renderPlayerMana () {
+function renderPlayerMana() {
   const playerMana = document.getElementById(`player-mana-container`);
-  playerMana.innerHTML = gameState.player.mana;  
+  playerMana.innerHTML = gameState.player.mana;
 }
 
 // Enemy UI render pipeline
@@ -317,27 +334,26 @@ function renderEnemyHand() {
   enemyHand.innerHTML = "";
 
   for (let i = 0; i < gameState.enemy.hand.length; i++) {
-  const enemyHandCard = gameState.enemy.hand[i];
+    const enemyHandCard = gameState.enemy.hand[i];
 
-  enemyHand.insertAdjacentHTML(
-    "beforeend",
-    `<div class="hand-card">
+    enemyHand.insertAdjacentHTML(
+      "beforeend",
+      `<div class="hand-card">
       ${enemyHandCard.name}<br>
       ${enemyHandCard.manaCost}
     </div>`,
-  );
-};
+    );
+  }
 }
 
-function renderEnemyHealth () {
+function renderEnemyHealth() {
   const enemyHealth = document.getElementById(`enemy-health-container`);
-enemyHealth.innerHTML = gameState.enemy.health;
+  enemyHealth.innerHTML = gameState.enemy.health;
 }
 
-function renderEnemyMana () {
-const enemyMana = document.getElementById(`enemy-mana-container`);
-enemyMana.innerHTML = gameState.enemy.mana;
+function renderEnemyMana() {
+  const enemyMana = document.getElementById(`enemy-mana-container`);
+  enemyMana.innerHTML = gameState.enemy.mana;
 }
 
 // UI Event Systems
-
