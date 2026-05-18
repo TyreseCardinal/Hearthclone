@@ -251,14 +251,25 @@ function endTurn() {
     : gameState.player
 );
 
-  gameState.turnNumber++;
+gameState.turnNumber++;
 
-  // Debugging
-  console.log(gameState.currentTurn);
-  console.log(gameState.turnNumber);
-  console.log("clicked");
+startTurn();
 
-  renderTurnIndicator();
+renderTurnIndicator();
+}
+
+function startTurn() {
+  drawCard(gameState.currentTurn);
+
+  if (gameState.currentTurn === gameState.player) {
+    gameState.player.mana++;
+    renderPlayerMana();
+    renderPlayerHand();
+  } else {
+    gameState.enemy.mana++;
+    renderEnemyMana();
+    renderEnemyHand();
+  }
 }
 
 function initializePlayerDeck() {
@@ -266,13 +277,22 @@ function initializePlayerDeck() {
 
   let playerDeck = [...heroBaseKit[selectedPlayerHero].deck];
 
+  for (let i = 0; i < playerDeck.length; i++) {
+    playerDeck[i].id = i;
+  }
+
   gameState.player.deck = playerDeck;
+
 }
 
 function initializeEnemyDeck() {
   let selectedEnemyHero = "mage";
 
   let enemyDeck = [...heroBaseKit[selectedEnemyHero].deck];
+
+  for (let i = 0; i < enemyDeck.length; i++) {
+    enemyDeck[i].id = i;
+  }
 
   gameState.enemy.deck = enemyDeck;
 }
@@ -300,7 +320,7 @@ function renderTurnIndicator() {
 }
 // Player UI render pipeline
 function renderPlayerHand() {
-  const playerHand = document.getElementById(`player-hand-container`);
+  const playerHand = document.getElementById("player-hand-container");
 
   playerHand.innerHTML = "";
 
@@ -309,9 +329,10 @@ function renderPlayerHand() {
 
     playerHand.insertAdjacentHTML(
       "beforeend",
-      `<div class="hand-card">
-      ${playerHandCard.name}<br>
-      ${playerHandCard.manaCost}
+      `<div class="hand-card" data-card-id="${playerHandCard.id}">
+        ${playerHandCard.name}<br>
+        ${playerHandCard.manaCost}<br>
+        ID: ${playerHandCard.id}
       </div>`,
     );
   }
