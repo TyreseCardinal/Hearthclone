@@ -336,6 +336,8 @@ function renderPlayerHand() {
       </div>`,
     );
   }
+
+  initializeHandCardEvents();
 }
 
 function renderPlayerHealth() {
@@ -378,3 +380,17 @@ function renderEnemyMana() {
 }
 
 // UI Event Systems
+
+function initializeHandCardEvents() {
+  const handCards = document.querySelectorAll(".hand-card");
+
+  for (let i = 0; i < handCards.length; i++) {
+    const clickedHandCard = handCards[i];
+
+    clickedHandCard.addEventListener("click", () => {
+      const clickedCardId = clickedHandCard.dataset.cardId;
+
+      console.log(clickedCardId);
+    });
+  }
+}
