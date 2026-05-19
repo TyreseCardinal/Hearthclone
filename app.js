@@ -70,12 +70,14 @@ const gameState = {
     mana: 0,
     deck: [],
     hand: [],
+    battlefield: [],
   },
   enemy: {
     health: 30,
     mana: 0,
     deck: [],
     hand: [],
+    battlefield: [],
   },
 };
 
@@ -245,17 +247,16 @@ function drawOpeningHand(player, amount) {
 }
 
 function endTurn() {
-  gameState.currentTurn = (
-  gameState.currentTurn === gameState.player
-    ? gameState.enemy
-    : gameState.player
-);
+  gameState.currentTurn =
+    gameState.currentTurn === gameState.player
+      ? gameState.enemy
+      : gameState.player;
 
-gameState.turnNumber++;
+  gameState.turnNumber++;
 
-startTurn();
+  startTurn();
 
-renderTurnIndicator();
+  renderTurnIndicator();
 }
 
 function startTurn() {
@@ -282,7 +283,6 @@ function initializePlayerDeck() {
   }
 
   gameState.player.deck = playerDeck;
-
 }
 
 function initializeEnemyDeck() {
@@ -304,7 +304,47 @@ function initializeEndTurnButton() {
 
   console.log("Button initialized");
 }
+
+function playCard(cardId) {
+  let cardToPlay;
+
+  for (let i = 0; i < gameState.player.hand.length; i++) {
+    const currentCard = gameState.player.hand[i];
+
+    if (currentCard.id == cardId) {
+      cardToPlay = currentCard;
+      gameState.player.hand.splice(i, 1);
+      gameState.player.battlefield.push(cardToPlay);
+      break;
+    }
+  }
+
+renderPlayerBattlefield();
+renderPlayerHand();
+
+// Debugging
+console.log(cardToPlay);
+}
+
 // Render Systems
+function renderPlayerBattlefield() {
+  const playerBattlefield = document.getElementById("player-minion-container");
+
+  playerBattlefield.innerHTML = "";
+
+  for (let i = 0; i < gameState.player.battlefield.length; i++) {
+    const playerBattlefieldMinion = gameState.player.battlefield[i];
+
+    playerBattlefield.insertAdjacentHTML(
+      "beforeend",
+      `<div class="hand-card" data-card-id="${playerBattlefieldMinion.id}">
+        ${playerBattlefieldMinion.name}<br>
+        ${playerBattlefieldMinion.manaCost}<br>
+        ID: ${playerBattlefieldMinion.id}
+      </div>`,
+    );
+  }
+}
 
 // Turn indicator UI
 
@@ -390,7 +430,7 @@ function initializeHandCardEvents() {
     clickedHandCard.addEventListener("click", () => {
       const clickedCardId = clickedHandCard.dataset.cardId;
 
-      console.log(clickedCardId);
+      playCard(clickedCardId);
     });
   }
 }
