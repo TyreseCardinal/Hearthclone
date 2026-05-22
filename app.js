@@ -349,7 +349,7 @@ function renderPlayerBattlefield() {
 // Turn indicator UI
 
 function renderTurnIndicator() {
-  const turnIndicator = document.getElementById("turn-indicator-text");
+const turnIndicator = document.getElementById("turn-indicator-overlay");
 
   // Display current turn
   if (gameState.currentTurn === gameState.player) {
@@ -370,10 +370,29 @@ function renderPlayerHand() {
     playerHand.insertAdjacentHTML(
       "beforeend",
       `<div class="hand-card" data-card-id="${playerHandCard.id}">
-        ${playerHandCard.name}<br>
-        ${playerHandCard.manaCost}<br>
-        ID: ${playerHandCard.id}
-      </div>`,
+
+  <div class="card-mana">
+    ${playerHandCard.manaCost}
+  </div>
+
+  <div class="card-name">
+    ${playerHandCard.name}
+  </div>
+
+  <div class="card-art">
+  </div>
+
+  <div class="card-description">
+    ${playerHandCard.description}
+  </div>
+
+  <div class="card-stats">
+    ${playerHandCard.attack || 0}
+    /
+    ${playerHandCard.health || 0}
+  </div>
+
+</div>`,
     );
   }
 
