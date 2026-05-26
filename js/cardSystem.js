@@ -9,12 +9,12 @@ function playCard(cardId) {
       let cardManaCost = cardToPlay.manaCost;
 
       // Validation
-      if (gameState.player.mana < cardManaCost) {
+      if (gameState.player.availableMana < cardManaCost) {
         return;
       }
 
       // Spend mana
-      gameState.player.mana -= cardManaCost;
+      gameState.player.availableMana -= cardManaCost;
 
       // Move card from hand to battlefield
       gameState.player.hand.splice(i, 1);

@@ -65,7 +65,7 @@ function renderPlayerHealth() {
 function renderPlayerMana() {
   const playerMana = document.getElementById("player-mana-container");
 
-  playerMana.innerHTML = gameState.player.mana;
+  playerMana.innerHTML = `${gameState.player.availableMana} / ${gameState.player.maxMana}`;
 }
 
 function renderEnemyHand() {
@@ -91,6 +91,5 @@ function renderEnemyHealth() {
 
 function renderEnemyMana() {
   const enemyMana = document.getElementById("enemy-mana-container");
-
-  enemyMana.innerHTML = gameState.enemy.mana;
+    enemyMana.innerHTML = `${gameState.enemy.availableMana} / ${gameState.enemy.maxMana}`;
 }
