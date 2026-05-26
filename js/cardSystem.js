@@ -8,8 +8,18 @@ function playCard(cardId) {
       cardToPlay = currentCard;
       let cardManaCost = cardToPlay.manaCost;
 
-      // Validation
+      // Turn Validation
+      if (gameState.currentTurn !== gameState.player) {
+        return;
+      }
+
+      // Mana Validation
       if (gameState.player.availableMana < cardManaCost) {
+        return;
+      }
+
+      // Battlefield Space Validation
+      if (gameState.player.battlefield.length >= 7) {
         return;
       }
 
