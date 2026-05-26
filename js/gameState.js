@@ -7,7 +7,8 @@ const gameState = {
 
   player: {
     health: 30,
-    mana: 0,
+    availableMana: 0,
+    maxMana: 0,
     deck: [],
     hand: [],
     battlefield: [],
@@ -15,7 +16,8 @@ const gameState = {
 
   enemy: {
     health: 30,
-    mana: 0,
+    availableMana: 0,
+    maxMana: 0,
     deck: [],
     hand: [],
     battlefield: [],
