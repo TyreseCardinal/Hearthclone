@@ -6,7 +6,17 @@ function playCard(cardId) {
 
     if (currentCard.id === cardId) {
       cardToPlay = currentCard;
+      let cardManaCost = cardToPlay.manaCost;
 
+      // Validation
+      if (gameState.player.mana < cardManaCost) {
+        return;
+      }
+
+      // Spend mana
+      gameState.player.mana -= cardManaCost;
+
+      // Move card from hand to battlefield
       gameState.player.hand.splice(i, 1);
       gameState.player.battlefield.push(cardToPlay);
 
@@ -14,6 +24,7 @@ function playCard(cardId) {
     }
   }
 
+  renderPlayerMana();
   renderPlayerBattlefield();
   renderPlayerHand();
 
