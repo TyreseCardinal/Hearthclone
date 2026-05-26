@@ -1,5 +1,13 @@
+/* Base */
+
 body {
   margin: 0;
+
+  overflow: hidden;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background-color: #e8e8e8;
 }
 
 * {
@@ -10,69 +18,149 @@ body {
   display: none !important;
 }
 
-/* ====================================================== */
-/* Game Board */
-/* ====================================================== */
 
-.gameplay-screen {
+
+/* Screens */
+
+#main-menu-screen,
+#hero-select-screen {
   display: grid;
 
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(24, 1fr);
 
+  width: 100vw;
+  height: 100vh;
+}
+
+#main-menu-screen {
+  background-color: darkblue;
+}
+
+#click-to-start-btn {
+  grid-column: 11 / 15;
+  grid-row: 12 / 13;
+
+  background-color: red;
+  color: white;
+
+  padding: 1rem;
+
+  font-size: 1rem;
+
+  border: 1px solid black;
+
+  cursor: pointer;
+}
+
+
+
+/* Hero Selection */
+
+#hero-selection-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 24px;
+
+  grid-column: 5 / 21;
+  grid-row: 6 / 19;
+}
+
+.hero-selection-card {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 180px;
+  height: 260px;
+
+  border: 4px solid black;
+  border-radius: 16px;
+
+  background-color: navy;
+  color: white;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+.hero-selection-card:hover {
+  transform: scale(1.03);
+}
+
+.selected-hero {
+  border-color: gold;
+}
+
+
+
+/* Game Board */
+
+#game-board {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(24, 1fr);
+
+  width: 100vw;
   height: 100vh;
 
   background-color: #e8e8e8;
 }
 
-/* ====================================================== */
-/* Shared Section Styling */
-/* ====================================================== */
-
 .board-section {
   border: 2px solid black;
 }
 
-/* ====================================================== */
+
+
 /* Enemy Section */
-/* ====================================================== */
 
 #enemy-section {
-  grid-row: 1 / 2;
-  grid-column: 1 / 6;
+  grid-row: 1 / 5;
+  grid-column: 1 / 25;
 }
-
-/* Enemy Top Row */
 
 .top-row {
   display: flex;
 
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   height: 100%;
 
-  padding: 12px;
-  gap: 16px;
+  padding: 10px;
+
+  gap: 12px;
 }
 
-/* ====================================================== */
-/* Battlefield Section */
-/* ====================================================== */
+
+
+/* Battlefield */
 
 #battlefield-section {
-  grid-row: 2 / 5;
-  grid-column: 1 / 6;
-
   display: flex;
   flex-direction: column;
+
   justify-content: space-evenly;
 
-  padding: 24px;
-  gap: 24px;
-}
+  grid-row: 5 / 21;
+  grid-column: 1 / 25;
 
-/* Battlefield Rows */
+  padding: 12px;
+
+  gap: 12px;
+}
 
 .battlefield-row {
   display: flex;
@@ -80,63 +168,55 @@ body {
   justify-content: center;
   align-items: center;
 
-  min-height: 120px;
+  flex: 1;
+
+  gap: 14px;
 
   border: 2px dashed black;
+
+  font-size: 2rem;
 }
 
-/* Battlefield Center */
 
-.battlefield-center {
-  min-height: 80px;
-}
 
-/* ====================================================== */
 /* Player Section */
-/* ====================================================== */
 
 #player-section {
-  grid-row: 5 / 6;
-  grid-column: 1 / 6;
+  grid-row: 21 / 25;
+  grid-column: 1 / 25;
 }
-
-/* Player Bottom Row */
 
 .bottom-row {
   display: flex;
 
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   height: 100%;
 
-  padding: 12px;
-  gap: 16px;
+  padding: 10px;
+
+  gap: 12px;
 }
 
-/* ====================================================== */
-/* Shared Layout Containers */
-/* ====================================================== */
 
-/* Info Container */
+
+/* Shared Layout Containers */
 
 .info-container {
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  gap: 6px;
 }
-
-/* Hero Container */
 
 .hero-container {
   display: flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 }
-
-/* Hand + Deck Container */
 
 .hand-deck-container {
   display: flex;
@@ -145,31 +225,28 @@ body {
 
   flex-grow: 1;
 
-  gap: 12px;
+  gap: 10px;
 }
 
-/* ====================================================== */
-/* Shared Gameplay Containers */
-/* ====================================================== */
 
-/* Hand Container */
+
+/* Shared Gameplay Containers */
 
 .hand-container {
   display: flex;
 
-  align-items: center;
+  align-items: flex-end;
 
   flex-grow: 1;
 
-  min-height: 100px;
+  min-height: 70px;
 
-  padding: 12px;
-  gap: 12px;
+  padding: 10px;
 
   border: 2px dashed black;
-}
 
-/* Deck Container */
+  overflow: visible;
+}
 
 .deck-container {
   display: flex;
@@ -177,35 +254,31 @@ body {
   justify-content: center;
   align-items: center;
 
-  min-width: 80px;
-  min-height: 100px;
-
-  padding: 12px;
+  width: 70px;
+  height: 100px;
 
   border: 2px solid black;
-}
 
-/* Hero Icon */
+  background-color: #d8d8d8;
+
+  font-weight: bold;
+}
 
 .hero-icon-container {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
 
   border: 2px solid black;
+
+  background-color: #d8d8d8;
 }
 
-/* Hero Power */
-
 .hero-power-container {
-  min-width: 100px;
-  min-height: 48px;
+  width: 120px;
+  height: 42px;
 
   cursor: pointer;
 }
-
-/* ====================================================== */
-/* Stat Containers */
-/* ====================================================== */
 
 .stat-container {
   display: flex;
@@ -213,141 +286,193 @@ body {
   justify-content: center;
   align-items: center;
 
-  min-width: 100px;
-  min-height: 40px;
-
-  padding: 8px;
-
-  border: 2px solid black;
-}
-
-/* ====================================================== */
-/* Game UI */
-/* ====================================================== */
-
-#game-ui-section {
-  grid-column: 5 / 6;
-  grid-row: 3 / 4;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  gap: 12px;
-
-  background-color: aqua;
-
-  padding: 16px;
-}
-
-/* UI Containers */
-
-.ui-container {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-}
-
-/* End Turn Button */
-
-.ui-button {
-  padding: 12px 20px;
-
-  cursor: pointer;
-}
-
-/* ====================================================== */
-/* Hand Cards */
-/* ====================================================== */
-
-.hand-card {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  min-width: 90px;
-  min-height: 120px;
-
-  padding: 8px;
+  width: 80px;
+  height: 36px;
 
   border: 2px solid black;
 
   background-color: white;
+
+  font-weight: bold;
 }
 
-#main-menu-screen {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  height: 100vh;
-  width: 100vw;
-  align-items: center;
-  justify-items: center;
-  background-color: darkblue;
+
+
+/* Cards */
+
+.hand-card,
+.enemy-hand-card,
+.battlefield-card {
+  position: relative;
+
+  width: 115px;
+  height: 165px;
+
+  background-image: url("assets/images/card-template-free.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  overflow: visible;
+
+  border: 1px solid black;
 }
 
-#click-to-start-btn {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  padding: 1em;
-  background-color: red;
-  color: white;
+.hand-card:first-child,
+.enemy-hand-card:first-child {
+  margin-left: 0;
 }
 
-#hero-select-screen {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  height: 100vh;
-  width: 100vw;
+.hand-card:hover {
+  transform:
+    translateY(-18px)
+    scale(1.05);
+
+  z-index: 999;
+
+  cursor: pointer;
+
+  filter:
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
 }
 
-#hero-selection-container {
+.battlefield-card {
+  margin-left: 0;
+}
+
+
+
+/* Card Text Overlay */
+
+.card-mana,
+.card-name,
+.card-description,
+.card-attack,
+.card-health {
+  position: absolute;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.card-mana {
+  top: 8px;
+  left: 9px;
+
+  width: 24px;
+  height: 24px;
+
   display: flex;
-  justify-content: space-around;
-  flex-flow: row;
-  flex-direction: row;
-  height: 100%;
-  grid-column: 2 / 5;
-  grid-row: 2 / 3;
-}
-
-.hero-selection-card {
-  display: flex;
-  flex-direction: column;
-
   justify-content: center;
   align-items: center;
 
-  min-width: 180px;
-  min-height: 260px;
-
-  padding: 4px;
-
-  background: navy;
   color: white;
 
-  border: 4px solid black;
-  border-radius: 1rem;
-
-  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
-.selected-hero {
-  border: 4px solid gold;
+.card-name {
+  top: 92px;
+  left: 24px;
 
-  transform: scale(1.05);
+  width: 68px;
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 0.52rem;
+  font-weight: bold;
+
+  line-height: 1;
 }
 
-/* 
-.hero-selection-brute,
-.hero-selection-hunter,
-.hero-selection-mage {
-} */
+.card-description {
+  top: 118px;
+  left: 21px;
+
+  width: 74px;
+  height: 34px;
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 0.42rem;
+  font-weight: bold;
+
+  line-height: 1.1;
+
+  overflow: hidden;
+}
+
+.card-attack {
+  bottom: 5px;
+  left: 11px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.card-health {
+  bottom: 6px;
+  right: 7px;
+
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Overlay UI */
+
+#game-overlay-container {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+}
+
+#turn-indicator-overlay {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: 1.4rem;
+  font-weight: bold;
+
+  pointer-events: none;
+}
+
+#end-turn-button {
+  position: absolute;
+
+  top: 50%;
+  right: 32px;
+
+  transform: translateY(-50%);
+
+  pointer-events: auto;
+}

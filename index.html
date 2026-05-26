@@ -24,13 +24,11 @@
 
       <section id="hero-selection-container">
 
-        <div id="hero-selection-mage" class="hero-selection-card">Mage</div>
+        <div id="mage" class="hero-selection-card">Mage</div>
 
+        <div id="hunter" class="hero-selection-card">Hunter</div>
 
-        <div id="hero-selection-hunter" class="hero-selection-card">Hunter</div>
-
-
-        <div id="hero-selection-brute" class="hero-selection-card">Brute
+        <div id="brute" class="hero-selection-card">Brute
         </div>
 
       </section>
@@ -40,18 +38,18 @@
 
     <!-- Gameplay screen -->
     <section id="game-board" class="screen hidden gameplay-screen">
-      <!-- Game UI Section -->
-      <section class="board-section" id="game-ui-section">
-        <!-- Turn Information -->
-        <div class="ui-container" id="turn-info-container">
-          <p class="ui-text" id="turn-indicator-text"></p>
-        </div>
 
-        <!-- UI Controls -->
-        <div class="ui-container" id="controls-container">
-          <button class="ui-button" id="end-turn-button">END TURN</button>
-        </div>
-      </section>
+      <div id="game-overlay-container">
+
+  <div id="turn-indicator-overlay">
+    PLAYER TURN
+  </div>
+
+  <button id="end-turn-button">
+    End Turn
+  </button>
+
+</div>
 
       <!-- Battlefield Section -->
       <section class="board-section" id="battlefield-section">
@@ -59,9 +57,6 @@
         <div class="battlefield-row" id="enemy-minion-container">
           Enemy Minions Here
         </div>
-
-        <!-- Battlefield Center / Overlay Space -->
-        <div class="battlefield-center" id="battlefield-center-container"></div>
 
         <!-- Player Minion Row -->
         <div class="battlefield-row" id="player-minion-container">
@@ -151,7 +146,15 @@
     </section>
   </main>
 
-  <script src="app.js"></script>
+<script src="js/gameState.js"></script>
+<script src="js/heroData.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/deckSystem.js"></script>
+<script src="js/renderSystem.js"></script>
+<script src="js/cardSystem.js"></script>
+<script src="js/turnSystem.js"></script>
+<script src="js/eventSystem.js"></script>
+<script src="js/app.js"></script>
 </body>
 
 </html>
