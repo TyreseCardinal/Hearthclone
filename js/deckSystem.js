@@ -1,6 +1,8 @@
 function initializePlayerDeck() {
   const selectedPlayerHero = gameState.selectedHero;
-  const playerDeck = [...heroBaseKit[selectedPlayerHero].deck];
+  const playerDeck = heroBaseKit[selectedPlayerHero].deck.map((card) => {
+    return { ...card };
+  });
 
   for (let i = 0; i < playerDeck.length; i++) {
     playerDeck[i].id = `player-card-${i}`;
@@ -11,7 +13,9 @@ function initializePlayerDeck() {
 
 function initializeEnemyDeck() {
   const selectedEnemyHero = "mage";
-  const enemyDeck = [...heroBaseKit[selectedEnemyHero].deck];
+  const enemyDeck = heroBaseKit[selectedEnemyHero].deck.map((card) => {
+    return { ...card };
+  });
 
   for (let i = 0; i < enemyDeck.length; i++) {
     enemyDeck[i].id = `enemy-card-${i}`;

@@ -340,6 +340,10 @@ body {
   margin-left: 0;
 }
 
+.selected-attacker {
+  outline: 4px solid gold;
+  transform: translateY(-10px);
+}
 
 
 /* Card Text Overlay */

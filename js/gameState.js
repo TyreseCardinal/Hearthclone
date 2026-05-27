@@ -4,6 +4,7 @@ const gameState = {
   secondPlayer: null,
   currentTurn: null,
   turnNumber: 0,
+  selectedAttackerId: null,
 
   player: {
     health: 30,

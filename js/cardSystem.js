@@ -38,5 +38,4 @@ function playCard(cardId) {
   renderPlayerBattlefield();
   renderPlayerHand();
 
-  console.log(cardToPlay);
-}
+console.log("played card:", cardToPlay.id);}

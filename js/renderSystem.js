@@ -1,6 +1,12 @@
 function createCardHTML(card, cardClass) {
+  let finalCardClass = cardClass;
+
+  if (card.id === gameState.selectedAttackerId) {
+    finalCardClass += " selected-attacker";
+  }
+
   return `
-    <div class="${cardClass}" data-card-id="${card.id}">
+    <div class="${finalCardClass}" data-card-id="${card.id}">
       <div class="card-mana">${card.manaCost}</div>
 
       <div class="card-name">${card.name}</div>
@@ -27,6 +33,8 @@ function renderPlayerBattlefield() {
       createCardHTML(playerBattlefieldMinion, "battlefield-card"),
     );
   }
+
+  initializePlayerBattlefieldEvents();
 }
 
 function renderTurnIndicator() {

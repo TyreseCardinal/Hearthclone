@@ -52,3 +52,30 @@ confirmHeroButton.addEventListener("click", () => {
   showScreen("game-board");
   startGame();
 });
+
+function initializePlayerBattlefieldEvents() {
+  const playerBattlefieldCards = document.querySelectorAll(
+    "#player-minion-container .battlefield-card",
+  );
+
+  for (let i = 0; i < playerBattlefieldCards.length; i++) {
+    const clickedBattlefieldCard = playerBattlefieldCards[i];
+
+    clickedBattlefieldCard.addEventListener("click", () => {
+      const clickedCardId = clickedBattlefieldCard.dataset.cardId;
+
+      if (clickedCardId === gameState.selectedAttackerId) {
+
+        gameState.selectedAttackerId = null;
+
+      } else {
+        gameState.selectedAttackerId = clickedCardId;
+
+      }
+      
+      console.log("selected attacker:", gameState.selectedAttackerId);
+
+      renderPlayerBattlefield();
+    });
+  }
+}
