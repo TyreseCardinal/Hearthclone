@@ -5,6 +5,7 @@ const gameState = {
   currentTurn: null,
   turnNumber: 0,
   selectedAttackerId: null,
+  selectedTargetId: null,
 
   player: {
     health: 30,

@@ -1,7 +1,9 @@
 function initializeEndTurnButton() {
   const endTurnButton = document.getElementById("end-turn-button");
 
-  endTurnButton.addEventListener("click", endTurn);
+  endTurnButton.addEventListener("click", () => {
+    endTurn("player");
+  });
 }
 
 function initializeHandCardEvents() {
@@ -73,9 +75,33 @@ function initializePlayerBattlefieldEvents() {
 
       }
       
-      console.log("selected attacker:", gameState.selectedAttackerId);
 
       renderPlayerBattlefield();
+    });
+  }
+}
+
+function initializeEnemyBattlefieldEvents() {
+  const enemyBattlefieldCards = document.querySelectorAll(
+    "#enemy-minion-container .battlefield-card",
+  );
+
+  for (let i = 0; i < enemyBattlefieldCards.length; i++) {
+    const clickedBattlefieldCard = enemyBattlefieldCards[i];
+
+    clickedBattlefieldCard.addEventListener("click", () => {
+      const clickedCardId = clickedBattlefieldCard.dataset.cardId;
+
+      if (clickedCardId === gameState.selectedTargetId) {
+        gameState.selectedTargetId = null;
+      } else {
+        gameState.selectedTargetId = clickedCardId;
+      }
+
+
+      attackSelectedTarget();
+      
+      renderEnemyBattlefield();
     });
   }
 }

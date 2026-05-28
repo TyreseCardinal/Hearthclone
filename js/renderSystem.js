@@ -1,3 +1,13 @@
+function renderTurnIndicator() {
+  const turnIndicator = document.getElementById("turn-indicator-overlay");
+
+  if (gameState.currentTurn === gameState.player) {
+    turnIndicator.innerHTML = "Player Turn";
+  } else {
+    turnIndicator.innerHTML = "Enemy Turn";
+  }
+}
+
 function createCardHTML(card, cardClass) {
   let finalCardClass = cardClass;
 
@@ -5,17 +15,13 @@ function createCardHTML(card, cardClass) {
     finalCardClass += " selected-attacker";
   }
 
+  if (card.id === gameState.selectedTargetId) {
+    finalCardClass += " selected-target";
+  }
+
   return `
     <div class="${finalCardClass}" data-card-id="${card.id}">
-      <div class="card-mana">${card.manaCost}</div>
-
-      <div class="card-name">${card.name}</div>
-
-      <div class="card-description">${card.description}</div>
-
-      <div class="card-attack">${card.attack || 0}</div>
-
-      <div class="card-health">${card.health || 0}</div>
+      ...
     </div>
   `;
 }
@@ -37,15 +43,23 @@ function renderPlayerBattlefield() {
   initializePlayerBattlefieldEvents();
 }
 
-function renderTurnIndicator() {
-  const turnIndicator = document.getElementById("turn-indicator-overlay");
+function renderEnemyBattlefield() {
+  const enemyBattlefield = document.getElementById("enemy-minion-container");
 
-  if (gameState.currentTurn === gameState.player) {
-    turnIndicator.innerHTML = "Player Turn";
-  } else {
-    turnIndicator.innerHTML = "Enemy Turn";
+  enemyBattlefield.innerHTML = "";
+
+  for (let i = 0; i < gameState.enemy.battlefield.length; i++) {
+    const enemyBattlefieldMinion = gameState.enemy.battlefield[i];
+
+    enemyBattlefield.insertAdjacentHTML(
+      "beforeend",
+      createCardHTML(enemyBattlefieldMinion, "battlefield-card"),
+    );
   }
+
+  initializeEnemyBattlefieldEvents();
 }
+
 
 function renderPlayerHand() {
   const playerHand = document.getElementById("player-hand-container");
@@ -99,5 +113,6 @@ function renderEnemyHealth() {
 
 function renderEnemyMana() {
   const enemyMana = document.getElementById("enemy-mana-container");
-    enemyMana.innerHTML = `${gameState.enemy.availableMana} / ${gameState.enemy.maxMana}`;
+
+  enemyMana.innerHTML = `${gameState.enemy.availableMana} / ${gameState.enemy.maxMana}`;
 }

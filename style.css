@@ -345,6 +345,12 @@ body {
   transform: translateY(-10px);
 }
 
+.selected-target {
+  outline: 4px solid red;
+  transform: translateY(-10px);
+  filter: drop-shadow(0 0 12px red);
+}
+
 
 /* Card Text Overlay */
 

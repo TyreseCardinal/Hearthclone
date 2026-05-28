@@ -19,4 +19,6 @@ function startGame() {
   renderPlayerHand();
   renderEnemyHand();
   renderTurnIndicator();
+
+  startTurn();
 }
