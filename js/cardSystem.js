@@ -1,4 +1,8 @@
 function playCard(cardId) {
+  if (gameState.gameOver) {
+  return;
+}
+
   let cardToPlay;
 
   for (let i = 0; i < gameState.player.hand.length; i++) {

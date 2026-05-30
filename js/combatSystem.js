@@ -1,4 +1,8 @@
 function attackSelectedTarget() {
+  if (gameState.gameOver) {
+  return;
+}
+
   if (!gameState.selectedAttackerId) {
     return;
   }
@@ -47,10 +51,65 @@ gameState.enemy.battlefield = gameState.enemy.battlefield.filter((card) => {
   return card.health === undefined || card.health > 0;
 });
 
-  attacker.canAttack = false;
   gameState.selectedAttackerId = null;
   gameState.selectedTargetId = null;
 
   renderPlayerBattlefield();
-  renderEnemyBattlefield();
+renderEnemyBattlefield();
+checkGameOver();
+}
+
+function attackEnemyHero() {
+  if (gameState.gameOver) {
+  return;
+}
+  
+  if (!gameState.selectedAttackerId) {
+    return;
+  }
+
+  let attacker;
+
+  for (let i = 0; i < gameState.player.battlefield.length; i++) {
+    const currentCard = gameState.player.battlefield[i];
+
+    if (currentCard.id === gameState.selectedAttackerId) {
+      attacker = currentCard;
+      break;
+    }
+  }
+
+  if (!attacker) {
+    return;
+  }
+
+  if (!attacker.canAttack) {
+    return;
+  }
+
+  gameState.enemy.health -= attacker.attack;
+
+  attacker.canAttack = false;
+
+  gameState.selectedAttackerId = null;
+  gameState.selectedTargetId = null;
+
+  renderEnemyHealth();
+  renderPlayerBattlefield();
+
+  checkGameOver();
+}
+
+function checkGameOver() {
+  if (gameState.player.health <= 0) {
+    gameState.gameOver = true;
+
+    alert("Defeat");
+  }
+
+  if (gameState.enemy.health <= 0) {
+    gameState.gameOver = true;
+
+    alert("Victory");
+  }
 }

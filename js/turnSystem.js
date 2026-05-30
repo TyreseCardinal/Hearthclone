@@ -1,4 +1,8 @@
 function endTurn(source = "player") {
+  if (gameState.gameOver) {
+    return;
+  }
+
   if (source === "player" && gameState.currentTurn !== gameState.player) {
     return;
   }
@@ -18,8 +22,6 @@ function endTurn(source = "player") {
 
   startTurn();
   renderTurnIndicator();
-
-
 }
 
 function startTurn() {
@@ -39,6 +41,10 @@ function startTurn() {
     renderPlayerMana();
     renderPlayerHand();
   } else {
+    for (let i = 0; i < gameState.enemy.battlefield.length; i++) {
+      gameState.enemy.battlefield[i].canAttack = true;
+    }
+
     if (gameState.enemy.maxMana < 10) {
       gameState.enemy.maxMana++;
     }

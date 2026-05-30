@@ -1,7 +1,9 @@
 function startGame() {
   initializePlayerDeck();
   initializeEnemyDeck();
+
   initializeEndTurnButton();
+  initializeEnemyHeroEvents();
 
   if (Math.random() < 0.5) {
     gameState.startingPlayer = gameState.player;
