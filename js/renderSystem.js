@@ -21,7 +21,18 @@ function createCardHTML(card, cardClass) {
 
   return `
     <div class="${finalCardClass}" data-card-id="${card.id}">
-      ...
+      <img src="./assets/cards/base-card-body.svg" class="card-base">
+
+      <img src="./assets/cards/mana-gem.svg" class="card-mana-gem">
+      <img src="./assets/cards/attack-gem.svg" class="card-attack-gem">
+      <img src="./assets/cards/health-gem.svg" class="card-health-gem">
+
+      <div class="card-mana">${card.manaCost}</div>
+      <div class="card-attack">${card.attack || 0}</div>
+      <div class="card-health">${card.health || 0}</div>
+
+      <div class="card-name">${card.name}</div>
+      <div class="card-description">${card.description}</div>
     </div>
   `;
 }
@@ -59,7 +70,6 @@ function renderEnemyBattlefield() {
 
   initializeEnemyBattlefieldEvents();
 }
-
 
 function renderPlayerHand() {
   const playerHand = document.getElementById("player-hand-container");
